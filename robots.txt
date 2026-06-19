@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://ntgh23.github.io/main-index-aiyouxi-com-cn/sitemap.xml

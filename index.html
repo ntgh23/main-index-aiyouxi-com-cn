@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>爱游戏 · 发现好玩的起点</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Helvetica, Arial, sans-serif;
+            background: #f6fbfa;
+            color: #1a2e2c;
+            line-height: 1.65;
+            padding: 0 1.2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .page-wrap {
+            max-width: 820px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 2rem 0 3rem;
+            flex: 1;
+        }
+
+        /* 网格卡片背景 (微妙的网格装饰) */
+        .grid-bg {
+            position: relative;
+        }
+
+        .grid-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(40, 140, 120, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(40, 140, 120, 0.04) 1px, transparent 1px);
+            background-size: 28px 28px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .hero {
+            position: relative;
+            z-index: 1;
+            padding: 0.6rem 0 1.8rem;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            background: #d7efe9;
+            color: #1f6b5f;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            padding: 0.2rem 0.9rem;
+            border-radius: 30px;
+            margin-bottom: 1.2rem;
+            border: 1px solid #bfe3da;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: -0.3px;
+            line-height: 1.2;
+            color: #0e3d37;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, #1f7a6a, #3c9b89);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-intro {
+            font-size: 1.1rem;
+            color: #2e4b46;
+            max-width: 640px;
+            margin-bottom: 0.25rem;
+        }
+
+        .section-card {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(2px);
+            border-radius: 28px;
+            padding: 1.8rem 1.8rem 2rem;
+            margin: 2.4rem 0;
+            box-shadow: 0 6px 18px rgba(30, 80, 70, 0.06), 0 0 0 1px rgba(60, 140, 120, 0.12);
+            transition: box-shadow 0.2s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-card:hover {
+            box-shadow: 0 10px 28px rgba(30, 100, 85, 0.08), 0 0 0 1px rgba(50, 150, 130, 0.18);
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: #0f423b;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin-bottom: 1.4rem;
+            letter-spacing: -0.2px;
+        }
+
+        .card-title small {
+            font-size: 0.85rem;
+            font-weight: 400;
+            background: #d2ece4;
+            padding: 0.1rem 0.75rem;
+            border-radius: 40px;
+            color: #1a6254;
+            margin-left: 0.3rem;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.1rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 0.3rem 0;
+        }
+
+        .feature-marker {
+            flex-shrink: 0;
+            width: 28px;
+            height: 28px;
+            background: #d5f0e8;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            color: #1b735e;
+            font-weight: 500;
+            margin-top: 0.2rem;
+        }
+
+        .feature-text {
+            flex: 1;
+        }
+
+        .feature-text strong {
+            color: #0d463e;
+            font-weight: 600;
+        }
+
+        .feature-text p {
+            margin-top: 0.2rem;
+            color: #30534d;
+            font-size: 0.95rem;
+        }
+
+        .scene-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.9rem;
+            margin: 0.8rem 0 0.2rem;
+        }
+
+        .scene-card {
+            background: #eef8f4;
+            border-radius: 24px;
+            padding: 1rem 1.1rem;
+            border: 1px solid #cde3db;
+        }
+
+        .scene-card h4 {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #125047;
+            margin-bottom: 0.3rem;
+        }
+
+        .scene-card p {
+            font-size: 0.88rem;
+            color: #2e554d;
+        }
+
+        .faq-mini {
+            background: #ecf7f3;
+            border-radius: 20px;
+            padding: 1.2rem 1.5rem;
+            margin-top: 1.8rem;
+            border: 1px solid #d0e7df;
+        }
+
+        .faq-mini summary {
+            font-weight: 500;
+            color: #0f4d43;
+            cursor: pointer;
+            padding: 0.2rem 0;
+        }
+
+        .faq-mini p {
+            margin-top: 0.5rem;
+            color: #2a5950;
+            font-size: 0.9rem;
+        }
+
+        .closing-note {
+            text-align: left;
+            margin: 2.2rem 0 0.8rem;
+            padding: 0.4rem 0;
+            border-top: 1px solid #cde3db;
+            padding-top: 1.8rem;
+            font-size: 0.95rem;
+            color: #2b554d;
+        }
+
+        .closing-note a {
+            color: #157a65;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid #7fc7b6;
+            transition: border-color 0.15s, color 0.15s;
+        }
+
+        .closing-note a:hover {
+            color: #0a5343;
+            border-bottom-color: #0a5343;
+        }
+
+        .link-soft {
+            color: #157a65;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.15s;
+        }
+
+        .link-soft:hover {
+            opacity: 0.75;
+        }
+
+        .footer-note {
+            margin-top: 2.8rem;
+            font-size: 0.8rem;
+            color: #59837a;
+            text-align: center;
+            border-top: 1px solid #d5e9e2;
+            padding-top: 1.2rem;
+        }
+
+        @media (max-width: 580px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .section-card {
+                padding: 1.3rem 1.2rem;
+                border-radius: 22px;
+            }
+
+            .scene-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-intro {
+                font-size: 1rem;
+            }
+
+            .feature-item {
+                gap: 0.7rem;
+            }
+
+            .faq-mini {
+                padding: 1rem 1rem;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+
+            .card-title {
+                font-size: 1.2rem;
+            }
+
+            .scene-card {
+                padding: 0.8rem 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrap grid-bg">
+    <div class="hero">
+        <div class="hero-tag">🎮 ｜ 游戏生活</div>
+        <h1>一眼看懂 <span>爱游戏</span></h1>
+        <div class="hero-intro">
+            打开一个网站，最先想问的往往是：“这里到底能做什么？”<br>
+            不是为了猎奇，只想快速判断值不值得留下来翻一翻。
+        </div>
+    </div>
+
+    <div class="section-card">
+        <div class="card-title">
+            📋 一句话概括
+            <small>用途</small>
+        </div>
+        <p style="font-size: 1.05rem; margin-bottom: 0.6rem;">
+            <strong>爱游戏</strong> 是一个围绕游戏内容与玩家日常的轻社区型站点 —— 你可以在里面找到游戏推荐、玩法思路、版本动态，以及一些不算太深但刚好够用的讨论。它不卖设备，也不做严肃评测，更像一个愿意陪你聊聊最近在玩什么的地方。
+        </p>
+        <p style="color: #345f57; font-size: 0.95rem;">
+            如果你是那种偶尔想看看别人在玩什么、或者想分享自己最近沉迷哪款游戏的人，这里会比较对味。
+        </p>
+    </div>
+
+    <div class="section-card">
+        <div class="card-title">
+            ✦ 几个容易记住的特点
+        </div>
+        <div class="feature-list">
+            <div class="feature-item">
+                <div class="feature-marker">1</div>
+                <div class="feature-text">
+                    <strong>内容偏实际体验</strong>
+                    <p>比起搬运新闻，更常出现的是玩家视角的游玩记录、短评、避坑提醒。读起来像朋友在聊天，不是官方通稿。</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-marker">2</div>
+                <div class="feature-text">
+                    <strong>分类不绕</strong>
+                    <p>热门、独立、联机、怀旧…… 按兴趣分组，不用在十几个子菜单里翻来找去。手机上看也很清楚。</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-marker">3</div>
+                <div class="feature-text">
+                    <strong>讨论氛围比较放松</strong>
+                    <p>没有太复杂的等级或积分系统，留言区也相对干净。适合潜水，也欢迎偶尔冒个泡。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-card" style="padding-bottom: 1.6rem;">
+        <div class="card-title">
+            🎯 你可能会在哪些场景用上它
+        </div>
+        <div class="scene-grid">
+            <div class="scene-card">
+                <h4>🎲 周末不知道玩什么</h4>
+                <p>翻翻推荐列表，看看别人最近的通关记录，也许就能找到合口味的游戏。</p>
+            </div>
+            <div class="scene-card">
+                <h4>💬 刚入坑某个游戏</h4>
+                <p>搜一下有没有同好讨论，或者看看有没有容易忽略的小技巧、常见坑。</p>
+            </div>
+            <div class="scene-card">
+                <h4>📦 想回顾老游戏</h4>
+                <p>怀旧分区里偶尔会有老玩家写回忆帖，比起百科更有温度。</p>
+            </div>
+            <div class="scene-card">
+                <h4>🧩 随手写点感想</h4>
+                <p>不需要长篇大论，短评几句也能发。适合不想发在社交平台但又想记录的时候。</p>
+            </div>
+        </div>
+        <div style="margin-top: 1rem; font-size: 0.9rem; color: #386b61; background: #e5f4ee; padding: 0.4rem 1rem; border-radius: 40px; display: inline-block;">
+            ⚡ 以上场景基于常见使用习惯推测，具体以网站实际内容为准
+        </div>
+    </div>
+
+    <div class="faq-mini">
+        <details>
+            <summary>❓ 几个常见疑问（快速浏览）</summary>
+            <p><strong>需要注册才能看内容吗？</strong> 大部分浏览不需要账号，但发帖或评论可能需要简单注册。</p>
+            <p><strong>内容更新频率如何？</strong> 不算特别密集，但每周都有新帖子，不至于一潭死水。</p>
+            <p><strong>有没有手机App？</strong> 目前主要是网页版，手机浏览器适配做得还不错，可以直接用。</p>
+            <p style="margin-bottom: 0.2rem;"><strong>适合硬核玩家吗？</strong> 偏轻度与中等深度，硬核数据党可能会觉得不够解渴，但休闲翻翻没问题。</p>
+        </details>
+    </div>
+
+    <div class="closing-note">
+        <p>
+            如果你对上面这些描述有一点点好奇，不妨直接去 <a href="https://main-index-aiyouxi.com.cn">爱游戏</a> 转一圈。
+            不用带着什么目的，就随便看看最近的帖子，或许会发现一两个自己也感兴趣的话题。
+        </p>
+        <p style="margin-top: 1rem;">
+            一个网站适不适合自己，往往要亲自点开才知道。至少，它没有复杂的门槛，也没有铺天盖地的弹窗。
+        </p>
+    </div>
+
+    <div class="footer-note">
+        <span>基于实际感受描述 · 页面仅供介绍参考</span>
+    </div>
+</div>
+</body>
+</html>
