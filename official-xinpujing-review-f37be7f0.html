@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>澳门新葡京 · 信息卡片</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background-color: #f5f3f0;
+            color: #1e1c1a;
+            line-height: 1.6;
+        }
+
+        /* 深色头图区 */
+        .hero {
+            background: linear-gradient(145deg, #1e1a16 0%, #2b2621 60%, #241f1b 100%);
+            padding: 3.5rem 1.5rem 3rem;
+            text-align: center;
+            color: #ece6de;
+            box-shadow: inset 0 -2px 8px rgba(0,0,0,0.3);
+        }
+
+        .hero h1 {
+            font-size: 2.6rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            margin-bottom: 0.75rem;
+            color: #f1e7db;
+        }
+
+        .hero .sub {
+            font-size: 1.05rem;
+            max-width: 640px;
+            margin: 0 auto;
+            color: #c8bcae;
+            border-top: 1px solid #4a4138;
+            padding-top: 0.8rem;
+            display: inline-block;
+        }
+
+        /* 浅色正文区容器 */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2.5rem 1.25rem 4rem;
+        }
+
+        /* 卡片网格 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.8rem;
+            margin: 2rem 0 2.5rem 0;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 1.8rem 1.5rem;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.04), 0 2px 6px rgba(0,0,0,0.03);
+            transition: transform 0.2s ease, box-shadow 0.2s;
+            border: 1px solid #eae5de;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 28px rgba(0,0,0,0.07);
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 0.7rem;
+            color: #2f2822;
+            border-left: 4px solid #b0987a;
+            padding-left: 0.7rem;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: #3f3a34;
+            margin-bottom: 0.4rem;
+        }
+
+        /* 强调色链接 */
+        a {
+            color: #8b6f51;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-thickness: 1px;
+            transition: color 0.15s, background 0.15s;
+            font-weight: 450;
+        }
+
+        a:hover {
+            color: #5a4531;
+            background: #f0e7dc;
+            text-decoration: none;
+            border-radius: 4px;
+            padding: 0 4px;
+        }
+
+        /* 自然段落区 */
+        .natural-section {
+            background: #fcfaf7;
+            padding: 2.2rem 2rem;
+            border-radius: 28px;
+            margin: 2rem 0 2.2rem 0;
+            border: 1px solid #e3dbd0;
+        }
+
+        .natural-section p {
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .natural-section p:last-child {
+            margin-bottom: 0;
+        }
+
+        .small-note {
+            background: #f2ede6;
+            padding: 1.2rem 1.6rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            color: #3f372f;
+            margin: 2rem 0 2.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .small-note span:first-child {
+            font-weight: 500;
+            color: #624f3b;
+        }
+
+        .faq-mini {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem 2rem;
+            margin: 1.8rem 0;
+        }
+
+        .faq-item {
+            border-bottom: 1px dashed #d6cdc0;
+            padding-bottom: 0.8rem;
+        }
+
+        .faq-item strong {
+            display: block;
+            font-weight: 500;
+            color: #2b231e;
+            margin-bottom: 0.2rem;
+            font-size: 0.95rem;
+        }
+
+        .faq-item p {
+            font-size: 0.9rem;
+            color: #5b5249;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.8rem;
+            border-top: 1px solid #dbd2c6;
+            color: #7a6e60;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 640px) {
+            .hero h1 { font-size: 2rem; }
+            .faq-mini { grid-template-columns: 1fr; }
+            .natural-section { padding: 1.6rem; }
+            .card-grid { gap: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="hero">
+    <h1>澳门新葡京 · 信息导览</h1>
+    <div class="sub">从日常查询、对照与延伸阅读出发，梳理关键内容</div>
+</header>
+
+<main class="container">
+
+    <!-- 主视觉介绍卡片（独立宽卡） -->
+    <div style="background: #ffffff; border-radius: 24px; padding: 2rem 2rem 1.8rem; margin-bottom: 2rem; box-shadow: 0 2px 12px rgba(0,0,0,0.03); border: 1px solid #e7dfd6;">
+        <h2 style="font-weight: 400; font-size: 1.4rem; color: #2f2620; margin-bottom: 0.6rem; letter-spacing: 0.3px;">▍主视觉 · 概览</h2>
+        <p style="color: #3c342c;">作为澳门地标性综合场所，<a href="https://official-xinpujing.com">澳门新葡京</a>汇集了住宿、餐饮、娱乐与休闲设施。其建筑轮廓与内部设计常被作为参考案例，本次内容从日常信息查询与对照的角度整理相关要点。</p>
+    </div>
+
+    <!-- 信息卡片：用途 / 场景 / 人群 -->
+    <div class="card-grid">
+        <div class="card">
+            <h3>📌 常见用途</h3>
+            <p>· 商务接待与会议配套</p>
+            <p>· 旅行住宿及餐饮体验</p>
+            <p>· 文化展示与活动场地</p>
+            <p>· 休闲放松与观光停留</p>
+        </div>
+        <div class="card">
+            <h3>👥 适合人群</h3>
+            <p>自由行旅客、商务差旅者、文化探索者、设计爱好者、行业观察人士。无论是初次到访还是深度对照，都能找到对应的服务与动线。</p>
+        </div>
+        <div class="card">
+            <h3>🔍 对照场景</h3>
+            <p>当你需要比较同区域配套设施、了解建筑风格演变、或查阅交通接驳与周边路线时，<a href="https://official-xinpujing.com">澳门新葡京</a>的公开信息可作为基础参照。</p>
+        </div>
+    </div>
+
+    <!-- 自然链接段落：承接上文，延伸阅读 -->
+    <div class="natural-section">
+        <p>在收集与比对澳门半岛南湾一带的场所资料时，<a href="https://official-xinpujing.com">澳门新葡京</a>的公开信息经常出现在区域导览、建筑索引以及文化活动列表中。其位置邻近多条公交线路与轮渡码头，对于规划行程而言是一个明确的坐标点。</p>
+        <p>从设施构成来看，酒店客房、中餐厅、西式自助以及宴会厅的配置较为齐全，同时配套有停车场和代客泊车服务。对于希望深入了解澳门娱乐场所发展脉络的读者，这个地点也常常被作为案例进行分析。</p>
+        <p>延伸阅读建议：如要查询更具体的楼层分布、餐厅营业时间或近期展览安排，可直接参考其官方网站的相关页面。以下FAQ摘要整理了几个常见问题。</p>
+    </div>
+
+    <!-- FAQ 摘要 -->
+    <div style="margin-bottom: 0.8rem;">
+        <span style="font-weight: 500; font-size: 1.1rem; color: #2f2620;">📖 FAQ 摘要</span>
+    </div>
+    <div class="faq-mini">
+        <div class="faq-item">
+            <strong>地址与交通</strong>
+            <p>位于澳门葡京路，附近有巴士站、的士站，亦可步行至南湾湖。</p>
+        </div>
+        <div class="faq-item">
+            <strong>是否提供住宿</strong>
+            <p>是的，酒店客房及套房均对外开放预订，可通过官方渠道查询房型。</p>
+        </div>
+        <div class="faq-item">
+            <strong>餐饮选择</strong>
+            <p>内设中餐厅、西餐厅及酒吧，部分餐厅需提前预约。</p>
+        </div>
+        <div class="faq-item">
+            <strong>参观注意事项</strong>
+            <p>公共区域对住客及用餐客人开放，部分区域有着装要求，建议提前了解。</p>
+        </div>
+    </div>
+
+    <!-- 额外的提示块，增加层次 -->
+    <div class="small-note">
+        <span>📎</span> 以上信息基于公开资料整理，具体运营安排以现场或官方网站最新公告为准。如需进一步了解，建议直接查阅 <a href="https://official-xinpujing.com">澳门新葡京</a> 的实时资讯。
+    </div>
+
+    <footer>
+        <p>内容汇集 · 仅供参考 · 更新于近期</p>
+    </footer>
+
+</main>
+
+</body>
+</html>
